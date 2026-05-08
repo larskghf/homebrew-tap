@@ -5,7 +5,7 @@
 class Clawdstacc < Formula
   desc "Self-hosted Codespaces for Claude Code, on your own Mac"
   homepage "https://github.com/larskghf/clawdstacc"
-  version "0.1.1"
+  version "0.2.0"
   license "MIT"
 
   depends_on "code-server"
@@ -13,8 +13,8 @@ class Clawdstacc < Formula
   depends_on :macos
 
   if Hardware::CPU.intel?
-    url "https://github.com/larskghf/clawdstacc/releases/download/v0.1.1/clawdstacc_0.1.1_darwin_amd64.tar.gz"
-    sha256 "f557455c342ee341397130e402b25b8d153ebc3ecc2658617b4769cb9cf0b375"
+    url "https://github.com/larskghf/clawdstacc/releases/download/v0.2.0/clawdstacc_0.2.0_darwin_amd64.tar.gz"
+    sha256 "b500bfcd3d8c049770d3a11c1789557b5c80a4c39340477cf476832c6a436e95"
 
     define_method(:install) do
       bin.install "bin/clawdstacc"
@@ -24,8 +24,8 @@ class Clawdstacc < Formula
     end
   end
   if Hardware::CPU.arm?
-    url "https://github.com/larskghf/clawdstacc/releases/download/v0.1.1/clawdstacc_0.1.1_darwin_arm64.tar.gz"
-    sha256 "60a4fde4de2668cb1a6ee91127c20279be89d07c32c68b300c8f92a133575c4e"
+    url "https://github.com/larskghf/clawdstacc/releases/download/v0.2.0/clawdstacc_0.2.0_darwin_arm64.tar.gz"
+    sha256 "6251a170e42ae1932cf76d28433faad33de7e8c865367583bdfdb9b7a7e107cd"
 
     define_method(:install) do
       bin.install "bin/clawdstacc"
@@ -33,6 +33,14 @@ class Clawdstacc < Formula
       # can copy it without hunting for the source tarball later.
       (etc/"clawdstacc").install "clawdstacc.conf.example"
     end
+  end
+
+  def post_install
+    # On `brew upgrade`, re-render plists, restart only the agents whose
+    # plist content actually changed, and kickstart the dashboard so its
+    # in-memory templates pick up the new binary. No-op on fresh installs
+    # (reload exits cleanly when no clawdstacc agents are installed yet).
+    system "#{bin}/clawdstacc", "reload" rescue nil
   end
 
   def caveats
