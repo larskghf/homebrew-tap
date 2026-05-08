@@ -5,7 +5,7 @@
 class Clawdstacc < Formula
   desc "Self-hosted Codespaces for Claude Code, on your own Mac"
   homepage "https://github.com/larskghf/clawdstacc"
-  version "0.1.0"
+  version "0.1.1"
   license "MIT"
 
   depends_on "code-server"
@@ -13,8 +13,8 @@ class Clawdstacc < Formula
   depends_on :macos
 
   if Hardware::CPU.intel?
-    url "https://github.com/larskghf/clawdstacc/releases/download/v0.1.0/clawdstacc_0.1.0_darwin_amd64.tar.gz"
-    sha256 "b33a98e7ac752d0574d54397729c0ac201693b1d21b580c798f069c8664d035e"
+    url "https://github.com/larskghf/clawdstacc/releases/download/v0.1.1/clawdstacc_0.1.1_darwin_amd64.tar.gz"
+    sha256 "f557455c342ee341397130e402b25b8d153ebc3ecc2658617b4769cb9cf0b375"
 
     define_method(:install) do
       bin.install "bin/clawdstacc"
@@ -24,8 +24,8 @@ class Clawdstacc < Formula
     end
   end
   if Hardware::CPU.arm?
-    url "https://github.com/larskghf/clawdstacc/releases/download/v0.1.0/clawdstacc_0.1.0_darwin_arm64.tar.gz"
-    sha256 "f757c4d16cdb691039c55d71253ae278bee8aaae67fb461666223c0a1791db06"
+    url "https://github.com/larskghf/clawdstacc/releases/download/v0.1.1/clawdstacc_0.1.1_darwin_arm64.tar.gz"
+    sha256 "60a4fde4de2668cb1a6ee91127c20279be89d07c32c68b300c8f92a133575c4e"
 
     define_method(:install) do
       bin.install "bin/clawdstacc"
@@ -40,15 +40,12 @@ class Clawdstacc < Formula
       clawdstacc also needs the Claude Code CLI (not on brew):
         curl -fsSL https://claude.com/install.sh | bash
 
-      First-time setup (config goes to XDG, the binary picks it up automatically):
-        mkdir -p ~/.config/clawdstacc
-        cp #{etc}/clawdstacc/clawdstacc.conf.example ~/.config/clawdstacc/clawdstacc.conf
+      First-time setup — the first `clawdstacc setup` writes
+      ~/.config/clawdstacc/clawdstacc.conf from the bundled defaults and
+      exits. Review it, then re-run:
+        clawdstacc setup
         $EDITOR ~/.config/clawdstacc/clawdstacc.conf
         clawdstacc setup
-
-      Or use the bundled installer for the full bootstrap (clones repo,
-      generates a fresh CODESERVER_PASSWORD, runs setup):
-        bash <(curl -fsSL https://raw.githubusercontent.com/larskghf/clawdstacc/main/install.sh)
     EOS
   end
 
