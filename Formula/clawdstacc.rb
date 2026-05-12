@@ -5,7 +5,7 @@
 class Clawdstacc < Formula
   desc "Self-hosted Codespaces for Claude Code, on your own Mac"
   homepage "https://github.com/larskghf/clawdstacc"
-  version "0.3.4"
+  version "0.3.5"
   license "MIT"
 
   depends_on "code-server"
@@ -13,8 +13,8 @@ class Clawdstacc < Formula
   depends_on :macos
 
   if Hardware::CPU.intel?
-    url "https://github.com/larskghf/clawdstacc/releases/download/v0.3.4/clawdstacc_0.3.4_darwin_amd64.tar.gz"
-    sha256 "ac5d43dd00bde5d6ca28aee3ad434e59e6be8b4743ddf3a99102245f5425e962"
+    url "https://github.com/larskghf/clawdstacc/releases/download/v0.3.5/clawdstacc_0.3.5_darwin_amd64.tar.gz"
+    sha256 "060ca7875d4d6051b9282dfcc7000cad9df10bf35f02cfbf86006935be427f9a"
 
     define_method(:install) do
       bin.install "bin/clawdstacc"
@@ -24,8 +24,8 @@ class Clawdstacc < Formula
     end
   end
   if Hardware::CPU.arm?
-    url "https://github.com/larskghf/clawdstacc/releases/download/v0.3.4/clawdstacc_0.3.4_darwin_arm64.tar.gz"
-    sha256 "0f695772193bf1433887a1f99ff62ddd7758d1e1a930c690db4b7410c2516478"
+    url "https://github.com/larskghf/clawdstacc/releases/download/v0.3.5/clawdstacc_0.3.5_darwin_arm64.tar.gz"
+    sha256 "675f4c25b4c4b4716231a944a9a41d7a51a2f3e87358e106441564805bd296ad"
 
     define_method(:install) do
       bin.install "bin/clawdstacc"
